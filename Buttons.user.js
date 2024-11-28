@@ -51,9 +51,7 @@ SOFTWARE.
 
     // Функция для переключения iframe
     function toggleIframe(url, coinName) {
-        // Проверяем, существует ли iframe
         if (!iframes[url]) {
-            // Создаем iframe
             let iframe = document.createElement('iframe');
             iframe.style.width = '80%';
             iframe.style.height = '80%';
@@ -66,16 +64,17 @@ SOFTWARE.
             document.body.appendChild(iframe);
             iframes[url] = iframe;
 
-            // После загрузки iframe выполняем поиск
-            iframe.onload = () => injectLQHMSearch(iframe, coinName);
+            iframe.onload = () => {
+                console.log('Iframe loaded, initiating search with delay...');
+                setTimeout(() => injectLQHMSearch(iframe, coinName), 500); // Задержка 500 мс
+            };
         } else {
-            // Если iframe уже существует, переключаем видимость
             const iframe = iframes[url];
             if (iframe.style.display === 'none') {
-                iframe.style.display = 'block'; // Показываем iframe
-                injectLQHMSearch(iframe, coinName); // Выполняем поиск заново
+                iframe.style.display = 'block';
+                injectLQHMSearch(iframe, coinName); // Выполняем поиск
             } else {
-                iframe.style.display = 'none'; // Скрываем iframe
+                iframe.style.display = 'none';
             }
         }
 
@@ -105,12 +104,12 @@ SOFTWARE.
                     setTimeout(() => {
                         let dropdownItem = document.querySelector('li.MuiAutocomplete-option');
                         if (dropdownItem) dropdownItem.click();
-                    }, 700);
+                    }, 700); // Задержка перед выбором из выпадающего списка
                 } else {
                     console.error('Search input not found');
                 }
             }
-            setTimeout(performSearch, 200);
+            setTimeout(performSearch, 300); // Небольшая задержка перед вводом текста
         })();`;
 
         iframe.contentWindow.eval(searchScript);
@@ -180,5 +179,5 @@ SOFTWARE.
         monitorCoinName("#__next > main > div.baseBg.tv-head > div > button:nth-child(3)");
     };
 
-    console.log('Script with toggle and repeated search for LQ_HM loaded.');
+    console.log('Script with delayed search for LQ_HM loaded.');
 })();
