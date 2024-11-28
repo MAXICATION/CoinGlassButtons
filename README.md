@@ -24,7 +24,7 @@ Tampermonkey — это менеджер пользовательских скр
 ### 2. Установите скрипт
 1. Нажмите на ссылку ниже, чтобы открыть скрипт в режиме установки Tampermonkey:
 
-   [Установить CoinGlass Iframe Buttons](https://raw.githubusercontent.com/USERNAME/REPOSITORY/main/CoinGlassIframeButtons.user.js)
+   [Установить CoinGlass Iframe Buttons](https://raw.githubusercontent.com/MAXICATION/REPOSITORY/main/CoinGlassIframeButtons.user.js)
 
 2. Tampermonkey откроет интерфейс установки.
 3. Нажмите **Install**.
