@@ -1,6 +1,6 @@
 # ❤️ CoinGlass Iframe Buttons with Toggle and Search
 
-Этот Tampermonkey-скрипт добавляет кнопки для открытия/закрытия iframe на сайте CoinGlass, включая автоматический поиск в Liquidation Heat Map (LQ_HM). Скрипт также позволяет переключаться между iframe, повторно выполняя поиск при их открытии.
+Этот Tampermonkey-скрипт добавляет кнопки для открытия/закрытия iframe на сайте CoinGlass, включая автоматический поиск в Liquidation Heat Map (LQ_HM).
 
 ---
 
@@ -21,18 +21,38 @@ Tampermonkey — это менеджер пользовательских скр
 
 ---
 
-### 2. Установите скрипт
+### 2. Включение Tampermonkey в браузере (если он не работает)
+
+#### В Google Chrome:
+1. Перейдите по адресу `chrome://extensions/`.
+2. Включите **Режим разработчика** (Developer Mode) в правом верхнем углу страницы.
+3. Убедитесь, что Tampermonkey включен:
+   - Найдите Tampermonkey в списке расширений.
+   - Если переключатель выключен, включите его.
+
+#### В Mozilla Firefox:
+1. Перейдите по адресу `about:addons`.
+2. В разделе **Расширения** найдите Tampermonkey.
+3. Убедитесь, что статус Tampermonkey — **Включено**.
+
+#### В Microsoft Edge:
+1. Перейдите по адресу `edge://extensions/`.
+2. Включите **Режим разработчика** (Developer Mode) в левом нижнем углу страницы.
+3. Найдите Tampermonkey в списке и включите его, если он отключен.
+
+---
+
+### 3. Установите скрипт
 1. Нажмите на ссылку ниже, чтобы открыть скрипт в режиме установки Tampermonkey:
 
-   [Установить CoinGlass Iframe Buttons](https://github.com/MAXICATION/CoinGlassIframeButtons/raw/main/Buttons.user.js
-)
+   [Установить CoinGlass Iframe Buttons](https://github.com/MAXICATION/CoinGlassIframeButtons/raw/main/Buttons.user.js)
 
 2. Tampermonkey откроет интерфейс установки.
 3. Нажмите **Install**.
 
 ---
 
-### 3. Использование скрипта
+### 4. Использование скрипта
 1. Откройте сайт [CoinGlass](https://www.coinglass.com/tv/).
 2. На странице появятся новые кнопки, позволяющие открывать различные iframes.
 3. Если вы находитесь на странице Liquidation Heat Map (LQ_HM), скрипт автоматически выполнит поиск по текущему тикеру монеты.
