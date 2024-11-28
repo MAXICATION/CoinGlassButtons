@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         ❤️CoinGlass Iframe Buttons
+// @name         ❤️CoinGlass Iframe Buttons with TradingView & Bybit Links
 // @namespace    http://tampermonkey.net/
-// @version      3.4
-// @description  Adds buttons to open/close iframes with specific websites and perform auto-search within the LQ_HM iframe with toggle functionality and repeated search on reopening.
+// @version      4.0
+// @description  Adds buttons to open/close iframes with specific websites, perform auto-search in the LQ_HM iframe, and provides quick navigation buttons to TradingView and Bybit for the current coin symbol.
 // @author       @maxication
 // @namespace    https://github.com/maxication
 // @license      MIT
@@ -38,7 +38,7 @@ SOFTWARE.
     let iframes = {};
     let currentCoinName = null;
 
-    // Функция для создания кнопки
+    // Function to create a button
     function createButton(text, color, textColor, onClick) {
         let button = document.createElement('button');
         button.innerText = text;
@@ -49,7 +49,7 @@ SOFTWARE.
         return button;
     }
 
-    // Функция для переключения iframe
+    // Function to toggle iframe
     function toggleIframe(url, coinName) {
         if (!iframes[url]) {
             let iframe = document.createElement('iframe');
@@ -66,19 +66,19 @@ SOFTWARE.
 
             iframe.onload = () => {
                 console.log('Iframe loaded, initiating search with delay...');
-                setTimeout(() => injectLQHMSearch(iframe, coinName), 500); // Задержка 500 мс
+                setTimeout(() => injectLQHMSearch(iframe, coinName), 500); // Delay for iframe load
             };
         } else {
             const iframe = iframes[url];
             if (iframe.style.display === 'none') {
                 iframe.style.display = 'block';
-                injectLQHMSearch(iframe, coinName); // Выполняем поиск
+                injectLQHMSearch(iframe, coinName); // Perform search
             } else {
                 iframe.style.display = 'none';
             }
         }
 
-        // Скрываем все остальные iframe
+        // Hide all other iframes
         Object.keys(iframes).forEach(key => {
             if (key !== url && iframes[key]) {
                 iframes[key].style.display = 'none';
@@ -86,7 +86,7 @@ SOFTWARE.
         });
     }
 
-    // Автопоиск в LQ_HM
+    // Auto-search in LQ_HM iframe
     function injectLQHMSearch(iframe, coinName) {
         if (!coinName) return;
 
@@ -104,24 +104,24 @@ SOFTWARE.
                     setTimeout(() => {
                         let dropdownItem = document.querySelector('li.MuiAutocomplete-option');
                         if (dropdownItem) dropdownItem.click();
-                    }, 700); // Задержка перед выбором из выпадающего списка
+                    }, 700); // Delay for dropdown selection
                 } else {
                     console.error('Search input not found');
                 }
             }
-            setTimeout(performSearch, 300); // Небольшая задержка перед вводом текста
+            setTimeout(performSearch, 300); // Delay before text input
         })();`;
 
         iframe.contentWindow.eval(searchScript);
     }
 
-    // Извлечение второго слова
+    // Extract the second word (coin name)
     function extractCoinName(text) {
         const parts = text.split(' ');
         return parts.length > 1 ? parts[1].trim() : null;
     }
 
-    // Функция для отслеживания изменений через setInterval
+    // Monitor coin name changes
     function monitorCoinName(selector) {
         setInterval(() => {
             const targetNode = document.querySelector(selector);
@@ -132,10 +132,10 @@ SOFTWARE.
                 console.log(`Coin changed: ${currentCoinName} -> ${newCoinName}`);
                 currentCoinName = newCoinName;
             }
-        }, 500); // Проверяем каждые 500 мс
+        }, 500); // Check every 500 ms
     }
 
-    // Создание кнопок для работы с iframe
+    // Create iframe buttons
     function createIframeButtons(targetDiv) {
         let websites = {
             'VS': { url: 'https://www.coinglass.com/pro/i/VisualScreener', textColor: '#ff33a6' },
@@ -159,7 +159,7 @@ SOFTWARE.
         });
     }
 
-    // Ожидание появления элемента
+    // Helper: Wait for an element to appear
     function waitForElement(xpath, callback) {
         const interval = setInterval(() => {
             const targetDiv = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
@@ -170,14 +170,74 @@ SOFTWARE.
         }, 500);
     }
 
+    // Create "TV" and "BB" buttons
+    function createTradingButtons() {
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.position = 'fixed';
+        buttonContainer.style.top = '670px';
+        buttonContainer.style.left = '25px';
+        buttonContainer.style.transform = 'translate(-50%, -50%)';
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.flexDirection = 'column';
+        buttonContainer.style.gap = '10px';
+
+        function createStyledButton(text, color, onClick) {
+            const button = document.createElement('button');
+            button.innerText = text;
+            button.classList.add('button-KTgbfaP5');
+            button.style.color = color;
+            button.style.backgroundColor = '#161A1E';
+            button.style.padding = '8px 16px';
+            button.style.border = 'none';
+            button.style.borderRadius = '2px';
+            button.style.cursor = 'pointer';
+            button.style.transition = 'all 0.3s';
+            button.addEventListener('mouseover', () => {
+                button.style.backgroundColor = '#2a2e39';
+                button.style.padding = '10px 18px';
+                button.style.borderRadius = '4px';
+            });
+            button.addEventListener('mouseout', () => {
+                button.style.backgroundColor = '#161A1E';
+                button.style.padding = '8px 16px';
+                button.style.borderRadius = '2px';
+            });
+            button.onclick = onClick;
+            return button;
+        }
+
+        const tradingViewButton = createStyledButton('TV', '#007BFF', () => {
+            const coinSymbol = window.location.pathname.split('/').pop().split('_')[1];
+            if (coinSymbol) {
+                window.open(`https://www.tradingview.com/chart/Kb1uNw2E/?symbol=BYBIT:${coinSymbol}.P`, '_blank');
+            } else {
+                alert("Не удалось определить символ монеты.");
+            }
+        });
+
+        const bybitButton = createStyledButton('BB', '#FFB11A', () => {
+            const coinSymbol = window.location.pathname.split('/').pop().split('_')[1];
+            if (coinSymbol) {
+                window.open(`https://www.bybit.com/trade/usdt/${coinSymbol}`, '_blank');
+            } else {
+                alert("Не удалось определить символ монеты.");
+            }
+        });
+
+        buttonContainer.appendChild(tradingViewButton);
+        buttonContainer.appendChild(bybitButton);
+        document.body.appendChild(buttonContainer);
+    }
+
+    // Main execution
     window.onload = function () {
         waitForElement("/html/body/div/main/div[1]/div", targetDiv => {
             createIframeButtons(targetDiv);
         });
 
-        // Запускаем мониторинг изменений в селекторе через setInterval
+        createTradingButtons();
         monitorCoinName("#__next > main > div.baseBg.tv-head > div > button:nth-child(3)");
     };
 
-    console.log('Script with delayed search for LQ_HM loaded.');
+    console.log('Enhanced CoinGlass script loaded.');
 })();
