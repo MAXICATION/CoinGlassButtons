@@ -10,7 +10,7 @@
   - 📈 **RSI Heat Map**
   - 🌊 **Liquidity Heatmap**
   - 📉 **Gainers/Losers**
-![image](https://github.com/user-attachments/assets/cba2516c-cccd-4f29-8550-d2f57a5d0cfe)
+  - ![image](https://github.com/user-attachments/assets/cba2516c-cccd-4f29-8550-d2f57a5d0cfe)
 
 - 🔍 **Auto-search in LQ_HM:** The script automatically inputs the current coin ticker into the search bar.
 
