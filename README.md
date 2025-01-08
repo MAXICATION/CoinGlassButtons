@@ -1,4 +1,4 @@
-# ❤️ CoinGlass Iframe Buttons with Toggle, Search, and Trading Buttons
+![image](https://github.com/user-attachments/assets/b86cb620-03eb-455a-8b1b-48bc7b916702)# ❤️ CoinGlass Iframe Buttons with Toggle, Search, and Trading Buttons
 
 Этот Tampermonkey-скрипт добавляет кнопки для открытия/закрытия iframe на сайте CoinGlass, включая автоматический поиск в Liquidation Heat Map (LQ_HM). Также добавлены компактные кнопки для перехода на **TradingView** и **Bybit**, упрощающие доступ к графикам и торговым инструментам.
 
@@ -62,6 +62,8 @@ Tampermonkey — это менеджер пользовательских скр
 
 ## ⚙️ Возможности
 - **Добавляет кнопки для работы с iframes**:
+  ![image](https://github.com/user-attachments/assets/4425c10c-be50-4927-8ca6-8b6cea8ecd51)
+
   - Visual Screener
   - Liquidation Heat Map
   - RSI Heat Map
