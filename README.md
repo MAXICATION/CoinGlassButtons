@@ -4,7 +4,7 @@
 
 Adds buttons for iframe management:
 
-![image](https://github.com/user-attachments/assets/64829577-f86a-4116-87ff-2625dddf4908)
+![image](https://github.com/user-attachments/assets/10ba1b78-780e-4ef9-88fd-4b816f709c16)
 
 Visual Screener
 
