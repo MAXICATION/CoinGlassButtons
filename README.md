@@ -71,7 +71,7 @@
 
 🖱️ Click the link below to open the script in Tampermonkey’s installation mode:
 
-📎 **[Install CoinGlass Iframe Buttons](#)**
+📎 **[Install CoinGlass Iframe Buttons]([#](https://www.tampermonkey.net/script_installation.php#url=https://github.com/MAXICATION/CoinGlassButtons/raw/refs/heads/main/Buttons.user.js))**
 
 🛠️ **Tampermonkey will open the installation interface:**
 
